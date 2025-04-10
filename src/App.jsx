@@ -1,15 +1,15 @@
 import { Toaster } from "react-hot-toast";
 import "./App.css";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import { useState, useEffect } from "react";
-import ImageGallery from "./ImageGallery/ImageGallery";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 import BeatLoader from "react-spinners/BeatLoader";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { getImages } from "./ApiServices/api";
-import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
-import ImageModal from "./ImageModal/ImageModal";
+import { getImages } from "./components/ApiServices/api";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
   const [query, setQuery] = useState("");
