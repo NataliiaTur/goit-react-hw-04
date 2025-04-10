@@ -1,9 +1,10 @@
 import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, openModal }) => {
   return (
     <div>
-      <ul>
+      <ul className={css.galleryList}>
         {images.map((image) => {
           return (
             <li key={image.id}>
@@ -13,6 +14,7 @@ const ImageGallery = ({ images }) => {
                 regular={image.urlReg}
                 likes={image.likes}
                 description={image.alt}
+                openModal={openModal}
               />
             </li>
           );

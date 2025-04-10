@@ -1,0 +1,26 @@
+.imageCard {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+.imageCard:hover {
+  transform: scale(1.02);
+}
+.imageCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.imageCard p {
+  padding: 10px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}

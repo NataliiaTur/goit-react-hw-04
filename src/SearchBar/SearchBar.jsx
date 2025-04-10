@@ -26,7 +26,7 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <>
-      <header>
+      <header className={css.header}>
         <form onSubmit={handleSubmit} className={css.form}>
           <input
             type="text"

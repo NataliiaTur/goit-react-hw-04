@@ -1,0 +1,35 @@
+.galleryList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  list-style: none;
+  margin: 0 auto;
+}
+
+/* Кожна картка займає 4 колонки при великому екрані */
+.galleryList li {
+  flex: 0 1 calc(25% - 20px); /* 4 в ряд */
+}
+
+/* 3 в ряд */
+@media (max-width: 1100px) {
+  .galleryList li {
+    flex: 0 1 calc(33.333% - 20px);
+  }
+}
+
+/* 2 в ряд */
+@media (max-width: 800px) {
+  .galleryList li {
+    flex: 0 1 calc(50% - 20px);
+  }
+}
+
+/* 1 в ряд */
+@media (max-width: 500px) {
+  .galleryList li {
+    flex: 0 1 100%;
+  }
+}

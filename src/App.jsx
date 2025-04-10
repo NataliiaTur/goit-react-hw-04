@@ -9,22 +9,32 @@ import axios from "axios";
 import { getImages } from "./ApiServices/api";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import ImageModal from "./ImageModal/ImageModal";
 
 function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalSrc, setModalSrc] = useState("");
+  const [modalAlt, setModalAlt] = useState("");
 
   useEffect(() => {
     if (!query) return;
 
     const fetchImages = async () => {
-      setIsLoading(true);
+      if (page === 1) {
+        setIsLoading(true);
+      } else {
+        setIsLoadingMore(true);
+      }
+
       try {
         const data = await getImages(query, page);
 
@@ -48,43 +58,71 @@ function App() {
         setTotalPages(data.total_pages);
         setIsVisible(page < data.total_pages);
       } catch (error) {
-        setError(error);
+        if (axios.isAxiosError(error)) {
+          setError("Network error: Unable to fetch images.");
+        } else {
+          setError("Unexpected error occurred.");
+        }
       } finally {
         setIsLoading(false);
+        setIsLoadingMore(false);
       }
     };
     fetchImages();
   }, [page, query]);
 
   const handleSearch = (value) => {
-    setIsLoading(true);
     setQuery(value);
-    setPage(1);
     setImages([]);
+    setPage(1);
     setIsEmpty(false);
     setError(null);
+    setIsVisible(false);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const openModal = (modalSrc, modalAlt) => {
+    setModalIsOpen(true);
+    setModalSrc(modalSrc);
+    setModalAlt(modalAlt);
   };
 
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
 
-      {isLoading && (
-        <div>
-          <BeatLoader color="#36d7b7" size={50} />
-        </div>
-      )}
+      {error && <ErrorMessage message={error} />}
 
       {images.length > 0 && (
         <>
-          <ImageGallery images={images} />
+          <ImageGallery images={images} openModal={openModal} />
+
           {isVisible && (
-            <LoadMoreBtn onClick={() => setPage((prev) => prev + 1)} />
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              {isLoadingMore && (
+                <BeatLoader
+                  color="#36d7b7"
+                  size={12}
+                  style={{ marginBottom: "10px" }}
+                />
+              )}
+              <LoadMoreBtn
+                onClick={() => setPage((prev) => prev + 1)}
+                disabled={isLoadingMore}
+              />
+            </div>
           )}
         </>
       )}
-
-      {error && <ErrorMessage />}
+      <ImageModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        src={modalSrc}
+        alt={modalAlt}
+      />
 
       <Toaster />
     </>

@@ -1,7 +1,7 @@
-const ErrorMessage = () => {
+const ErrorMessage = ({ message }) => {
   return (
-    <div>
-      <p>Woops! Something went wrong!</p>
+    <div style={{ textAlign: "center", marginTop: "20px", color: "red" }}>
+      <p>{message}</p>
     </div>
   );
 };

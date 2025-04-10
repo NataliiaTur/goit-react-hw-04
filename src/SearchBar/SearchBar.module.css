@@ -1,16 +1,24 @@
+.header {
+  background-color: #e0e0e0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .form {
   display: flex;
   gap: 10px;
-  margin: 0 auto;
 }
 .inputSearch {
   outline: none;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 300px;
 }
 
 .button {
-  background-color: #09f6c6;
+  background-color: #c1c1c1;
   display: flex;
   justify-content: center;
   align-items: center;

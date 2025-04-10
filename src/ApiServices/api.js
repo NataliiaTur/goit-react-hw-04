@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://api.unsplash.com/";
 axios.defaults.headers.common["Authorization"] = `Client-ID ${API_KEY}`;
 axios.defaults.params = {
   orientation: "landscape",
-  per_page: 10,
+  per_page: 20,
 };
 
 export const getImages = async (query, page) => {
